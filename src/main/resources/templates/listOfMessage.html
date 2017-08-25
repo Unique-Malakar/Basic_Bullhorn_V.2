@@ -1,33 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
+<html lang="en" xmlns:th="www.thymeleaf.org" >
+
+<head th:replace="base :: headstuff">
+
+
 </head>
 <body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="jumbotron">
 
-
-<a href="/add">Send a Message</a><br/>
+        <p><a href="/add" class="btn btn-primary btn-lg" role="button">Send a Message</a></p><br/>
 <table>
 
 
-    <tr th:each="message : ${messages}">
-        <td th:text="${message.content}"></td>
+    <h3 th:each="message : ${messages}">
+        <p th:inline="text">[[${message.content}]]</p><br/>
+        <p th:inline="text">[[${message.sentBy}]]
+            [[${message.postedDate}]]</p>
 
-    </tr>
 
-    <tr th:each="message : ${messages}">
-        <td th:text="${message.sentBy}"></td>
-        <td th:text="${message.postedDate}"></td>
-    </tr>
-    <tr th:each="message : ${messages}">
-    <td>
         <a th:href="@{/edit/{id} (id=${message.id})}">Edit</a>
         <a th:href="@{/view/{id} (id=${message.id})}">View</a>
-    </td>
-    </tr>
+        <br/>
+        <br/>
+        <p>--------------------------------------------------------------------------------------------------------</p>
+
+
+
+    </h3>
+
+
+
+
+
 
 
 </table>
+
+</div>
+</div>
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
 </body>
 </html>
